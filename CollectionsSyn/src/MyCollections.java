@@ -28,6 +28,7 @@ public class MyCollections {
 
     public void sleepMyDarling(int millis){
         try {
+            System.out.println("\n");
             sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();

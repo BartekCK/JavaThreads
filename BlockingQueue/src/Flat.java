@@ -6,6 +6,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class Flat implements Runnable {
 
+    private final int COUNT_RESIDENT = 20;
     private static boolean dayWithoutWork = false;
 
     private List<Resident> residents = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Flat implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < COUNT_RESIDENT; i++) {
             residents.add(new Resident());
         }
         residents.forEach(Thread::start);

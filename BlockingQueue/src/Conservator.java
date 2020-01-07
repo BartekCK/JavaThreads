@@ -2,7 +2,8 @@ import java.util.Random;
 
 public class Conservator extends Thread {
 
-    Random random = new Random();
+    final int randomTimeFix = 5000;
+    private Random random = new Random();
 
     @Override
     public void run() {
@@ -18,7 +19,7 @@ public class Conservator extends Thread {
     private void fixProblem() {
         try {
             String job = Flat.getBlockingQueue().take();
-            sleep(random.nextInt(5000));
+            sleep(random.nextInt(randomTimeFix));
             System.out.println("Wlasnie naprawilem " + job);
         } catch (InterruptedException e) {
             e.printStackTrace();

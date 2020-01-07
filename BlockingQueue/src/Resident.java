@@ -3,12 +3,14 @@ import java.util.Random;
 public class Resident extends Thread {
 
     private Random random = new Random();
+    private final int PROBABILITY = 10;//10%
+    private final int CHECK_APARTMENT_TIME = 10000;
 
     @Override
     public void run() {
         while (true) {
             try {
-                sleep(10000);
+                sleep(CHECK_APARTMENT_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -21,7 +23,7 @@ public class Resident extends Thread {
     }
 
     private void checkApartment() {
-        if (5 == random.nextInt(10)) {
+        if (5 == random.nextInt(PROBABILITY)) {
             reportProblem();
         }
     }

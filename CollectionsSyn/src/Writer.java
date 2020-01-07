@@ -28,7 +28,7 @@ public class Writer extends Thread{
 
         myCollections.getConcurrentSkipListSet().add(random.nextDouble());
 
-        //myCollections.sleepMyDarling(1);
+        myCollections.sleepMyDarling(1);
 
         myCollections.getCopyOnWriteArraySet().add(random.nextInt(7));
 
