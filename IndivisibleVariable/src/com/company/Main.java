@@ -1,30 +1,29 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        Treasure treasure = new Treasure();
-        WriteThread writeThread = new WriteThread(treasure);
-        ReadThread readThread1 = new ReadThread(treasure);
-        ReadThread readThread2 = new ReadThread(treasure);
-        ReadThread readThread3 = new ReadThread(treasure);
+        Valuable valuable = new Valuable();
 
-        writeThread.start();
-        readThread1.start();
-        readThread2.start();
-        readThread3.start();
+        List<Thread> threadList = new ArrayList<>();
+        threadList.add(new WriteThread(valuable));
+        for (int i = 0; i < 3; i++) {
+            threadList.add(new ReadThread(valuable));
+        };
+        threadList.forEach(Thread::start);
 
         try {
-            writeThread.join();
-            readThread1.join();
-            readThread2.join();
-            readThread3.join();
+            for (Thread thread : threadList) {
+                thread.join();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        System.out.println("All threads dead...");
+        System.out.println("This is the end");
 
     }
 }

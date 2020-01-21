@@ -2,17 +2,17 @@ package com.company;
 
 public class WriteThread extends Thread {
 
-    private final Treasure treasure;
+    private final Valuable valuable;
 
-    public WriteThread(Treasure treasure) {
-        this.treasure = treasure;
+    public WriteThread(Valuable valuable) {
+        this.valuable = valuable;
     }
 
     @Override
     public void run() {
 
         for(int i=0;i<10;i++) {
-            treasure.writeVolatile();
+            valuable.writeVolatile();
 
         }
 

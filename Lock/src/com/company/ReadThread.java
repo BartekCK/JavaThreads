@@ -4,11 +4,11 @@ import java.util.concurrent.locks.Lock;
 
 public class ReadThread extends Thread {
 
-    private final Treasure treasure;
+    private final Valuable valuable;
     Lock lock;
 
-    public ReadThread(Treasure treasure,Lock lock) {
-        this.treasure = treasure;
+    public ReadThread(Valuable valuable, Lock lock) {
+        this.valuable = valuable;
         this.lock = lock;
     }
 
@@ -18,7 +18,7 @@ public class ReadThread extends Thread {
         for(int i=0;i<10;i++){
             lock.lock();
             try{
-                treasure.readVolatile();
+                valuable.readVolatile();
             }
             finally {
                 lock.unlock();

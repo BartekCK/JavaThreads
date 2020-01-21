@@ -1,6 +1,6 @@
 package com.company;
 
-public class Treasure {
+public class Valuable {
 
     private volatile int value =0;
 

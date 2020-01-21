@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -7,25 +9,23 @@ public class Main {
 
     public static void main(String[] args) {
         Lock lock = new ReentrantLock();
-        Treasure treasure = new Treasure();
-        WriteThread writeThread = new WriteThread(treasure,lock);
-        ReadThread readThread1 = new ReadThread(treasure,lock);
-        ReadThread readThread2 = new ReadThread(treasure,lock);
-        ReadThread readThread3 = new ReadThread(treasure,lock);
-
-        writeThread.start();
-        readThread1.start();
-        readThread2.start();
-        readThread3.start();
+        Valuable valuable = new Valuable();
+        List <Thread> threadList = new ArrayList<>();
+        threadList.add(new WriteThread(valuable,lock));
+        for (int i = 0; i < 3; i++) {
+            threadList.add(new ReadThread(valuable,lock));
+        };
+        threadList.forEach(Thread::start);
 
         try {
-            writeThread.join();
-            readThread1.join();
-            readThread2.join();
-            readThread3.join();
+            for (Thread thread : threadList) {
+                thread.join();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        System.out.println("This is the end");
 
     }
 }

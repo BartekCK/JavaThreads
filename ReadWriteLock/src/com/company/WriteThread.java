@@ -1,16 +1,15 @@
 package com.company;
 
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class WriteThread extends Thread {
 
-    private final Treasure treasure;
+    private final Valuable valuable;
     final private ReentrantReadWriteLock.WriteLock writeLock;
 
-    public WriteThread(Treasure treasure,ReentrantReadWriteLock.WriteLock lock)
+    public WriteThread(Valuable valuable, ReentrantReadWriteLock.WriteLock lock)
     {
-        this.treasure = treasure;
+        this.valuable = valuable;
         this.writeLock=lock;
 
     }
@@ -25,7 +24,7 @@ public class WriteThread extends Thread {
             writeLock.lock();
 
             try {
-                treasure.writeVolatile();
+                valuable.writeVolatile();
             }
 
             finally {

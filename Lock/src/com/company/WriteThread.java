@@ -4,13 +4,13 @@ import java.util.concurrent.locks.Lock;
 
 public class WriteThread extends Thread {
 
-    private final Treasure treasure;
+    private final Valuable valuable;
     Lock lock;
 
 
-    public WriteThread(Treasure treasure, Lock lock)
+    public WriteThread(Valuable valuable, Lock lock)
     {
-        this.treasure = treasure;
+        this.valuable = valuable;
         this.lock = lock;
     }
 
@@ -22,7 +22,7 @@ public class WriteThread extends Thread {
             lock.lock();
             try
             {
-                treasure.writeVolatile();
+                valuable.writeVolatile();
 
             }
             finally {

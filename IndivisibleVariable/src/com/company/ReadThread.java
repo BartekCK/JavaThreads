@@ -2,16 +2,16 @@ package com.company;
 
 public class ReadThread extends Thread {
 
-    private final Treasure treasure;
+    private final Valuable valuable;
 
-    public ReadThread(Treasure treasure) {
-        this.treasure = treasure;
+    public ReadThread(Valuable valuable) {
+        this.valuable = valuable;
     }
 
     @Override
     public void run() {
         for(int i=0;i<10;i++){
-            treasure.readVolatile();
+            valuable.readVolatile();
 
         }
 
