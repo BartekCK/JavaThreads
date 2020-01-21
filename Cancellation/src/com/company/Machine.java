@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Machine extends Thread{
 
@@ -15,9 +17,7 @@ public class Machine extends Thread{
 
 
     public Machine(int typeCanceling) {
-        this.typeCanceling = typeCanceling;
-        if(typeCanceling == 4)
-            createdNuts.add(new Nut(666));
+        this.typeCanceling = typeCanceling;;
 
     }
 
@@ -54,15 +54,12 @@ public class Machine extends Thread{
         }
         else{
 
-            try {
-                createNut();
-                if(canceled) {
-                    if(startChecking())
-                        throw new InterruptedException("me message");
+            while(startChecking()) {
+                try {
+                    createNut();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (InterruptedException e) {
-                System.out.println("INTERRUPT " + System.nanoTime() + " " + isInterrupted());
             }
 
         }
@@ -94,8 +91,13 @@ public class Machine extends Thread{
     }
 
     private boolean startChecking(){
-        if (createdNuts.get(0).getPrice() == 666)
+        List<Nut> asd = createdNuts.stream().filter(e -> e.getPrice() == 666).collect(Collectors.toList());
+        if (asd.isEmpty())
             return true;
-        return false;
+        else return false;
+    }
+
+    public void addPoison(Nut nut){
+        createdNuts.add(nut);
     }
 }

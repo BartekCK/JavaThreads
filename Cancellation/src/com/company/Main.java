@@ -41,7 +41,8 @@ public class Main {
             }
             case 4: {
                 Main.sleepMe(3000);
-                machine.setCanceled(true);
+                machine.addPoison(new Nut(666));
+                //machine.setCanceled(true);
             }
             default: {
 
